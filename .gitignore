@@ -1,0 +1,8 @@
+Frontend/node_modules
+Frontend/package-lock.json
+Frontend/yarn.lock
+Backend/TweetApp.Backend/obj
+Backend/TweetApp.Backend/bin
+Backend/TweetApp.Backend/.vs
+Backend/RabbitMQ/bin
+Backend/RabbitMQ/obj

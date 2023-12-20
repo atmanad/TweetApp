@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "apis2": {
+      "restored": true,
+      "restoreTime": "2022-09-16T12:10:47.9292084Z"
+    }
+  },
+  "parameters": {
+    "apis2.subscriptionId": {
+      "Name": "apis2.subscriptionId",
+      "Type": "subscription",
+      "Value": "8d5a2e2f-8666-4c95-8b1c-5d984d235257"
+    },
+    "apis2.resourceGroupName": {
+      "Name": "apis2.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "rg-tweet"
+    }
+  }
+}

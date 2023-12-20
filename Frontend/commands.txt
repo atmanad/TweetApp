@@ -1,0 +1,41 @@
+docker build -t react-docker:1.0.0-dev .
+
+docker run --rm -it --name web -p 3000:3000 react-docker:1.0.0-dev
+
+use for dev to sync code, use in cmd
+docker run --rm -e CHOKIDAR_USEPOLLING=true -v %cd%\src:/code/src:ro -it --name dev-container -p 3000:3000 react-docker:1.0.0-dev  
+
+with env file
+docker run --rm --env-file ./.env -v %cd%\src:/code/src:ro -it --name dev-container -p 3000:3000 react-docker:1.0.0-dev
+
+docker-compose doesn't build the image by itself so we have to give a command when we need it
+docker-compose up --build
+
+for Dockerfile.dev
+docker build -f Dockerfile.dev .
+
+docker ps
+docker ps -a 
+docker rm {container id}
+docker images
+
+
+docker run -d --hostname my-rabbit --name tweetapp-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management
+
+
+172.17.32.1
+
+Server=tcp:tweetapp-server-atman.database.windows.net,1433;Initial Catalog=tweetappapi;Persist Security Info=False;User ID=sql-admin;Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+
+An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+
+Data Source=tweetapp-server-atman.database.windows.net;User ID=sql-admin;Password=********;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
+
+how to add tag
+docker tag imagename:tag tagname:tag
+
+docker tag atmanregistry.azurecr.io/tweetappfrontend:latest atmanregistry.azurecr.io/tweetappfrontend:20.09
+
+to push a docker image to azure container registry
+az login 
+az acr login --name registryname
