@@ -39,3 +39,21 @@ docker tag atmanregistry.azurecr.io/tweetappfrontend:latest atmanregistry.azurec
 to push a docker image to azure container registry
 az login 
 az acr login --name registryname
+
+
+
+
+
+building docker image
+docker build -t tweetappbackend:3.0 .
+
+tag docker image
+docker tag imageName atmanad/imageName:tag
+
+push to hub
+docker push atmanad/imageName:tag
+
+
+
+
+
