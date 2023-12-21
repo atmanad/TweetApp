@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://localhost:7149/api/v1/tweets";
+axios.defaults.baseURL = "https://api-tweetapp.azurewebsites.net/api/v1/tweets";
 
 // "https://apitweetapp.azure-api.net/apitweet/api/v1/tweets"
 //"https://backendtweet.azurewebsites.net/api/v1/tweets";
