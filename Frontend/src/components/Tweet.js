@@ -1,21 +1,23 @@
-import React, {  useState } from 'react';
-import { Modal} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Modal } from 'react-bootstrap';
 import { FaReply } from 'react-icons/fa'
 import { FaHeart } from 'react-icons/fa'
 import { FaRegHeart, FaEdit, FaRegTrashAlt } from 'react-icons/fa'
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { deleteTweet, postALike, updateTweet } from '../services/TweetService';
 import { useSelector, useDispatch } from 'react-redux';
 import { tweetActions } from '../store/tweet-slice';
 import { toast } from 'react-toastify';
 
 
-const Tweet = ({ t, reply, profilePage }) => {
+const Tweet = ({ t, reply, profilePage, loggedIn }) => {
+    console.log(loggedIn);
+    // console.log(t);
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user.currentUser);
     const tweetList = useSelector(state => state.tweet.tweetList);
     const [show, setShow] = useState(false);
-    
+
     const {
         datePosted, tag, subject, user, id, likes, replies
     } = t;
@@ -47,7 +49,7 @@ const Tweet = ({ t, reply, profilePage }) => {
     function formatDate(timestamp) {
         const d = new Date(timestamp)
         const time = d.toLocaleTimeString('en-US')
-        return time.substr(0, 5) + time.slice(-2) + ' | ' + d.toLocaleDateString()
+        return time.substring(0, 5) + time.slice(-2) + ' | ' + d.toLocaleDateString()
     }
 
 
@@ -60,7 +62,7 @@ const Tweet = ({ t, reply, profilePage }) => {
         updateTweet(currentUser.email, id, { tag: tag, subject: updatedTweet }).then(res => {
             console.log(res);
             tweetList.forEach((element, index) => {
-                if (element.id == id) {
+                if (element.id === id) {
                     dispatch(tweetActions.updateTweet({
                         index: index,
                         subject: updatedTweet
@@ -92,14 +94,14 @@ const Tweet = ({ t, reply, profilePage }) => {
 
     return (
         <>
-            <Modal show={show} onHide={handleClose} >
+            <Modal show={show} onHide={handleClose} className='tweet_edit_moda'>
                 <Modal.Dialog>
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Tweet</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
-                        <form style={{ minWidth: 400 + "px" }} onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmit}>
                             <textarea
                                 placeholder="What's happening?"
                                 className='form-control mb-3'
@@ -132,19 +134,22 @@ const Tweet = ({ t, reply, profilePage }) => {
                         <p className='mt-0'>{subject}</p>
                     </div>
                     <div className='tweet-icons'>
-                        <Link to={`/tweet/${id}`} className={reply ? "disabled" : ""}>
+                        {/* need to evaluate following condition to make reply button disabled or note
+                            loggedin false reply false => d
+                            loggedin true  reply true  => d
+                            loggedin true  reply false => "" */}
+
+                        <Link to={`/tweet/${id}`} className={!loggedIn || reply ? "disabled" : ""}>
                             <FaReply className='tweet-icon mr-2' />
                         </Link>
 
                         <span>{replies && replies.length}</span>
-                        <button className='heart-button ml-2'
-                            onClick={handleLike}
-                        >
+                        <button className={'heart-button ml-2' + (!loggedIn && ' disabled')}
+                            onClick={handleLike}>
                             {hasLiked.length !== 0
                                 ? <FaHeart color='#e0245e' className='tweet-icon' />
                                 : <FaRegHeart className='tweet-icon' />
                             }
-                            {/* <FaRegHeart className='tweet-icon' /> */}
                         </button>
                         <span>{likes && likes.length}</span>
                         {profilePage &&
@@ -152,9 +157,7 @@ const Tweet = ({ t, reply, profilePage }) => {
                                 <span><FaEdit className="tweet-icon" onClick={handleShow} /></span>
                                 <span><FaRegTrashAlt className="tweet-icon ml-3" color='#e0245e' onClick={handleDelete} /></span>
                             </>
-
                         }
-
                     </div>
                 </div>
             </div>

@@ -30,7 +30,7 @@ const NewTweet = ({loggedIn}) => {
     }
 
     return (
-        <div>
+        <div className='px-2'>
             <h3 className='center mt-5'>Compose new Tweet</h3>
             <form className='new-tweet' onChange={handleChange} onSubmit={handleSubmit}>
                 <input name='tag' className='form-control mb-2' placeholder='Enter tag' maxLength={50}/>

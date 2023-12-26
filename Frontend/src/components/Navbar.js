@@ -15,7 +15,7 @@ function Navigationbar() {
         <>
             <Navbar bg="light" expand="md">
                 <Container>
-                    <Navbar.Brand href="#" style={{fontWeight:"bold"}}>Tweet App</Navbar.Brand>
+                    <Navbar.Brand style={{fontWeight:"bold"}}>Tweet App</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className='justify-content-center'>
                         <Nav>

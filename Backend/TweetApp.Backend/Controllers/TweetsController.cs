@@ -31,6 +31,8 @@ namespace TweetApp.Backend.Controllers
             _response = new ResponseDto();
             //_sender = sender;
         }
+
+        [AllowAnonymous]
         [HttpGet("all")]
         public async Task<object> GetAllTweets()
         {
@@ -133,8 +135,7 @@ namespace TweetApp.Backend.Controllers
         {
             try
             {
-                var tweet = await _unitOfWork.Tweet.Get(x => x.Id == id);
-                if (tweet == null) throw new Exception("Tweet not found");
+                var tweet = await _unitOfWork.Tweet.Get(x => x.Id == id) ?? throw new Exception("Tweet not found");
                 _unitOfWork.Tweet.Delete(tweet);
                 await _unitOfWork.Save();
                 _response.IsSuccess = true;
@@ -153,6 +154,7 @@ namespace TweetApp.Backend.Controllers
             return _response;
         }
 
+        [AllowAnonymous]
         [HttpGet("replies")]
         public async Task<object> GetRepliesList()
         {
@@ -181,6 +183,7 @@ namespace TweetApp.Backend.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpGet("reactions")]
         public async Task<object> GetAllReactions()
         {

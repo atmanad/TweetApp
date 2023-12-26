@@ -11,9 +11,9 @@ import TweetPage from './TweetPage'
 import Navigationbar from './Navbar';
 import Register from './Register';
 import SignIn from './SignIn';
-import Home from './Home';
 import Profile from './Profile';
 import { authActions } from '../store/auth-slice';
+import BottomBar from './BottomBar';
 
 
 function App() {
@@ -40,14 +40,16 @@ function App() {
       <Navigationbar />
       <ToastContainer />
       <Routes>
+        <Route path='/' element={<Navigate to="/dashboard" />} />
         <Route path='/dashboard' element={<Dashboard loggedIn={isLoggedIn} />} />
-        <Route path='/tweet/:id' element={<TweetPage tweetList={tweetList} currentUser={currentUser} />} />
+        <Route path='/tweet/:id' element={<TweetPage tweetList={tweetList} currentUser={currentUser} loggedIn={isLoggedIn} />} />
         <Route path='/new' element={<NewTweet loggedIn={isLoggedIn} />} />
         <Route path='/profile/:id' element={<Profile tweetList={tweetList} loggedIn={isLoggedIn} />} />
         <Route path='/login' element={<SignIn loggedIn={isLoggedIn} />} />
         <Route path='/register' element={<Register />} />
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to="/login"  />} />
       </Routes>
+      <BottomBar />
     </Router>
   );
 }

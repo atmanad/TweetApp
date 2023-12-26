@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { tweetActions } from '../store/tweet-slice';
 import Loader from './Loader';
- 
+
 
 const Dashboard = ({ loggedIn }) => {
     const dispatch = useDispatch();
@@ -24,12 +24,16 @@ const Dashboard = ({ loggedIn }) => {
     }
 
 
-    useEffect(() => {
-        if(!loggedIn)navigate('/login');
-    }, [loggedIn]);
+    // useEffect(() => {
+    //     if(!loggedIn)navigate('/login');
+    // }, [loggedIn]);
+
+    // useEffect(() => {
+    //     if(loggedIn)loadTweets();
+    // }, []);
 
     useEffect(() => {
-        if(loggedIn)loadTweets();
+        loadTweets();
     }, []);
 
     const tweetList = useSelector(state => state.tweet.tweetList);
@@ -43,10 +47,10 @@ const Dashboard = ({ loggedIn }) => {
         tweetList.length !== 0 &&
         (
             <div>
-                <ul className='dashboard-list mt-5'>
+                <ul className='dashboard-list mt-5 pb-5 mb-5'>
                     {tweetList?.map((tweet) => (
                         <li key={tweet?.id}>
-                            <Tweet t={tweet} reply={false}/>
+                            <Tweet t={tweet} reply={false} loggedIn={loggedIn}/>
                         </li>
                     ))}
                 </ul>

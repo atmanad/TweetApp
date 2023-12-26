@@ -40,14 +40,21 @@ namespace TweetApp.Backend.Controllers
             //_sender = sender;
         }
 
+        [AllowAnonymous]
         [HttpGet("users/all")]
         public async Task<object> GetAllUsers()
         {
             try
             {
                 var users = await _unitOfWork.User.GetAll();
+                var specificProperties = users.Select(u => new
+                {
+                    u.FirstName,
+                    u.LastName,
+                    u.Email
+                }).ToList();
                 _response.DisplayMessage = "User list retrieved successfully";
-                _response.Result = users;
+                _response.Result = specificProperties;
                 Log.Information("Getting all users");
             }
             catch (Exception ex)

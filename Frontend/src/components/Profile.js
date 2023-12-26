@@ -30,35 +30,31 @@ function Profile({ tweetList, loggedIn }) {
 
     return (
         <>
-
-            <div className='row justify-content-center'>
-                <div className='col-md-8'>
-                    <Tabs
-                        defaultActiveKey="tweets"
-                        id="justify-tab-example"
-                        className="mb-3"
-                        justify
-                    >
-                        <Tab eventKey="tweets" title="My Tweets">
-                            <ul className='dashbard-list'>
-                                {
-                                    tweets?.map(t => (
-                                        <li key={t?.id}>
-                                            <Tweet t={t} reply={false} profilePage={true} />
-                                        </li>
-                                    ))
-                                }
-                            </ul>
-                            {/* <Tweet/> */}
-                        </Tab>
-                        <Tab eventKey="forgot-pass" className="justify-content-center" title="Change Password">
-                            <form className="mx-auto mt-5" onSubmit={handleSubmit} style={{ maxWidth: 400 + "px" }}>
-                                <input className='form-control mb-3' name='password' placeholder='Enter new password' onChange={e => setPassword(e.target.value)} />
-                                <button className='btn btn-primary' type='submit'>Submit</button>
-                            </form>
-                        </Tab>
-                    </Tabs>
-                </div>
+            <div className='col-md-8 mx-auto'>
+                <Tabs
+                    defaultActiveKey="tweets"
+                    id="justify-tab-example"
+                    className="mb-3"
+                    justify>
+                    <Tab eventKey="tweets" title="My Tweets">
+                        <ul className='dashbard-list mb-5'>
+                            {
+                                tweets?.map(t => (
+                                    <li key={t?.id}>
+                                        <Tweet t={t} reply={false} profilePage={true} />
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                        {/* <Tweet/> */}
+                    </Tab>
+                    <Tab eventKey="forgot-pass" className="justify-content-center" title="Change Password">
+                        <form className="mx-auto mt-5 px-2" onSubmit={handleSubmit} style={{ maxWidth: 400 + "px" }}>
+                            <input className='form-control mb-3' name='password' placeholder='Enter new password' onChange={e => setPassword(e.target.value)} />
+                            <button className='btn btn-primary' type='submit'>Submit</button>
+                        </form>
+                    </Tab>
+                </Tabs>
             </div>
         </>
     )

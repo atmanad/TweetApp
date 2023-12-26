@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Tweet from './Tweet'
 import { postAComment } from '../services/TweetService';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { tweetActions } from '../store/tweet-slice';
 import Loader from './Loader';
 
 
-const TweetPage = ({tweetList,currentUser }) => {
+const TweetPage = ({ tweetList, currentUser, loggedIn }) => {
     const [tweet, setTweet] = useState("");
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setLoading(true);
         const tweetById = tweetList.filter(ele => ele.id == id)[0];
         setTweet(tweetById)
         setLoading(false);
-    }, [tweetList]);
+    }, []);
 
-    // console.log(tweet);
+    useEffect(() => {
+        if (!loggedIn) navigate('/login');
+    }, [loggedIn]);
 
     return (
         <>
@@ -41,38 +44,36 @@ function TweetReply({ tweet, id, email, tweetList, setTweet }) {
             message: reply
         }
         let newTweet = {
-            replies:[newReply]
+            replies: [newReply]
         }
 
         postAComment(reply, email, id).then((res) => {
             if (res) {
                 tweetList.forEach((element, index) => {
-                    if (element.id == id) {
+                    if (element.id === id) {
                         dispatch(tweetActions.addReply({
                             index: index,
                             reply: newReply
                         }));
                         setReply("");
-                        setTweet(tweet =>({
+                        setTweet(tweet => ({
                             ...tweet,
                             newTweet
                         }));
                     }
                 });
-                //navigate('/dashboard');
-
             }
         }, error => console.log(error));
     }
 
     return (
-        <div className='mt-5'>
+        <div className='mt-5 pb-5'>
             <Tweet t={tweet} reply={true} />
             <div>
                 <h4 className='center mt-5'>Add a reply</h4>
-                <form className='new-tweet' onSubmit={handleSubmit}>
+                <form className='new-tweet px-2' onSubmit={handleSubmit}>
                     <input name='message' className='form-control mb-2' maxLength={144} value={reply} placeholder='Reply...' onChange={(e) => setReply(e.target.value)} />
-                    <button className='btn btn-primary' type='submit' disabled={reply == ""}>Submit</button>
+                    <button className='btn btn-primary' type='submit' disabled={reply === ""}>Submit</button>
                 </form>
             </div>
             {/* <NewTweet id={id} /> */}
