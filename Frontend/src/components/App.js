@@ -21,8 +21,7 @@ function App() {
   const token = useSelector(state => state.auth.token);
   const currentUser = useSelector(state => state.user.currentUser);
   const tweetList = useSelector(state => state.tweet.tweetList);
-  const { decodedToken, isExpired } = useJwt(sessionStorage.getItem('token'));
-  // console.log(decodedToken);
+  const { decodedToken, isExpired } = useJwt(sessionStorage.getItem('token') || "");
 
   useEffect(() => {
     if (decodedToken !== null && decodedToken.exp * 1000 < new Date().getTime()) {

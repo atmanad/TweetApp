@@ -24,8 +24,6 @@ function Profile({ tweetList, loggedIn }) {
     }, [loggedIn]);
 
     let tweets = tweetList?.filter(ele => ele.userId === id);
-    // console.log(tweets);
-
 
 
     return (
@@ -46,7 +44,6 @@ function Profile({ tweetList, loggedIn }) {
                                 ))
                             }
                         </ul>
-                        {/* <Tweet/> */}
                     </Tab>
                     <Tab eventKey="forgot-pass" className="justify-content-center" title="Change Password">
                         <form className="mx-auto mt-5 px-2" onSubmit={handleSubmit} style={{ maxWidth: 400 + "px" }}>

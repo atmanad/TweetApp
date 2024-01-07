@@ -11,8 +11,6 @@ import { toast } from 'react-toastify';
 
 
 const Tweet = ({ t, reply, profilePage, loggedIn }) => {
-    console.log(loggedIn);
-    // console.log(t);
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user.currentUser);
     const tweetList = useSelector(state => state.tweet.tweetList);

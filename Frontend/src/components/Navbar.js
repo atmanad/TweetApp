@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Nav,Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { logout } from '../services/UserService'
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,13 +9,12 @@ import { authActions } from '../store/auth-slice';
 function Navigationbar() {
     const currentUser = useSelector(state => state.user.currentUser);
     const loggedIn = useSelector(state => state.auth.isLoggedIn);
-    console.log(currentUser);
-    console.log(loggedIn);
+
     return (
         <>
             <Navbar bg="light" expand="md">
                 <Container>
-                    <Navbar.Brand style={{fontWeight:"bold"}}>Tweet App</Navbar.Brand>
+                    <Navbar.Brand style={{ fontWeight: "bold" }}>Tweet App</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav" className='justify-content-center'>
                         <Nav>
@@ -24,11 +23,6 @@ function Navigationbar() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            {/* <div className='nav justify-content-center'>
-                <ul>
-                    {loggedIn ? <LoggedIn currentUser={currentUser} /> : <LoggedOut />}
-                </ul>
-            </div> */}
         </>
     )
 }
@@ -42,22 +36,19 @@ function LoggedIn({ currentUser }) {
         logout();
         dispatch(authActions.logout());
         navigate('/login');
-        console.log('logging out');
     }
     return (
         <>
-            <NavLink to='/dashboard' style={({ isActive }) => ({ fontWeight: isActive ? "bold" : "normal" })}>
+            <NavLink to='/dashboard'>
                 Dashboard
             </NavLink>
-            <NavLink to='/new' style={({ isActive }) => ({ fontWeight: isActive ? "bold" : "normal" })}>
+            <NavLink to='/new'>
                 New Tweet
             </NavLink>
-            <NavLink to={`/profile/${currentUser.email}`} style={({ isActive }) => ({ fontWeight: isActive ? "bold" : "normal" })}>
+            <NavLink to={`/profile/${currentUser.email}`}>
                 <span>{currentUser.firstName}.{currentUser.lastName}</span>
             </NavLink>
-            <a>
-                <button onClick={handleClick} className="log-btn">Log out</button>
-            </a>
+            <button onClick={handleClick} className="log-btn">Log out</button>
         </>
     )
 }
@@ -74,16 +65,3 @@ function LoggedOut() {
     )
 
 }
-
-{/* <Navbar bg="light" expand="lg">
-    <Container>
-        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#link">Link</Nav.Link>
-            </Nav>
-        </Navbar.Collapse>
-    </Container>
-</Navbar> */}

@@ -25,7 +25,6 @@ function SignIn({ loggedIn }) {
     dispatch(showLoading());
     setIsLoading(true);
     login(creds).then((res) => {
-      console.log(res);
       dispatch(authActions.login(res.token));
       dispatch(userActions.setUser(res.result));
       dispatch(authActions.addToken(res.token))

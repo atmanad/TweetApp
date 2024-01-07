@@ -11,9 +11,9 @@ a {
   text-align: center;
 }
 
-.active {
+/* .active {
   font-weight: bold;
-}
+} */
 
 
 /* .nav a {
@@ -35,7 +35,7 @@ li {
   text-decoration: none;
 }
 
-#basic-navbar-nav a {
+#basic-navbar-nav a,button {
   margin: auto 10px auto 10px;
   font-size: 23px !important;
 }

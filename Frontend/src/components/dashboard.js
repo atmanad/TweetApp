@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
-import { useNavigate } from 'react-router-dom';
 import Tweet from './Tweet';
 import { loadAllTweet } from '../services/TweetService';
 import { useSelector } from 'react-redux';
@@ -11,7 +10,6 @@ import Loader from './Loader';
 
 const Dashboard = ({ loggedIn }) => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const loadTweets = () => {
         dispatch(showLoading());
         loadAllTweet().then(response => {
@@ -24,22 +22,13 @@ const Dashboard = ({ loggedIn }) => {
     }
 
 
-    // useEffect(() => {
-    //     if(!loggedIn)navigate('/login');
-    // }, [loggedIn]);
-
-    // useEffect(() => {
-    //     if(loggedIn)loadTweets();
-    // }, []);
-
     useEffect(() => {
-        loadTweets();
+        loadTweets();// eslint-disable-next-line
     }, []);
 
     const tweetList = useSelector(state => state.tweet.tweetList);
-    // console.log(tweetList);
 
-    if (tweetList === undefined) {
+    if (tweetList === undefined || tweetList.length === 0) {
         return <Loader />;
     }
 
@@ -50,7 +39,7 @@ const Dashboard = ({ loggedIn }) => {
                 <ul className='dashboard-list mt-5 pb-5 mb-5'>
                     {tweetList?.map((tweet) => (
                         <li key={tweet?.id}>
-                            <Tweet t={tweet} reply={false} loggedIn={loggedIn}/>
+                            <Tweet t={tweet} reply={false} loggedIn={loggedIn} />
                         </li>
                     ))}
                 </ul>
@@ -59,7 +48,5 @@ const Dashboard = ({ loggedIn }) => {
     )
 
 }
-
-
 
 export default Dashboard;
