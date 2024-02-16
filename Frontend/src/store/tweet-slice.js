@@ -13,7 +13,7 @@ const tweetSlice = createSlice({
             state.tweetList[action.payload.index].likes.push(action.payload.like);
         },
         addReply(state, action) {
-            state.tweetList[action.payload.index].replies.push(action.payload.reply);
+            state.tweetList[action.payload.index].replies.unshift(action.payload.reply);
         },
         updateTweet(state, action){
             state.tweetList[action.payload.index].subject = action.payload.subject;

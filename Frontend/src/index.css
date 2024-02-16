@@ -25,6 +25,18 @@ a {
   padding-left: 0;
 }*/
 
+.show-demo {
+  border-radius: 0;
+  background-color: rgba(2, 0, 36, 0.9);
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.show-demo:hover {
+  background-color: rgba(2, 0, 36, 0.8);
+  color: #ffffff;
+}
+
 ul {
   padding-left: 0;
 }
@@ -35,7 +47,7 @@ li {
   text-decoration: none;
 }
 
-#basic-navbar-nav a,button {
+#basic-navbar-nav a, #basic-navbar-nav button {
   margin: auto 10px auto 10px;
   font-size: 23px !important;
 }
@@ -123,7 +135,6 @@ div.modal-body {
 
 .tweet-icons>span {
   color: #969696;
-  margin: 0 15px 0 5px;
   font-size: 18px !important;
 }
 
@@ -137,7 +148,7 @@ div.modal-body {
   cursor: pointer;
 }
 
-.tweet-icon.disabled{
+.tweet-icon.disabled {
   pointer-events: none;
 }
 
@@ -147,6 +158,7 @@ div.modal-body {
 
 .heart-button {
   background: transparent;
+  outline: none;
   border: none;
 }
 
@@ -283,4 +295,19 @@ div.modal-body {
   }
 }
 
-/* bottom bar */
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #020024;
+  --bs-btn-border-color: #020024;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #2D2448;
+  --bs-btn-hover-border-color: #2D2448;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #2D2448;
+  --bs-btn-active-border-color: #2D2448;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #020024;
+  --bs-btn-disabled-border-color: #020024;
+}

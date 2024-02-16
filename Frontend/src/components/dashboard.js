@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { tweetActions } from '../store/tweet-slice';
 import Loader from './Loader';
+import driverObj from './driver';
 
 
 const Dashboard = ({ loggedIn }) => {
@@ -21,6 +22,9 @@ const Dashboard = ({ loggedIn }) => {
         });
     }
 
+    const showDemo = () => {
+        driverObj.drive();
+    }
 
     useEffect(() => {
         loadTweets();// eslint-disable-next-line
@@ -36,6 +40,7 @@ const Dashboard = ({ loggedIn }) => {
         tweetList.length !== 0 &&
         (
             <div>
+                {!loggedIn && <button onClick={showDemo} className='show-demo btn btn-primry m-0'>Show demo</button>}
                 <ul className='dashboard-list mt-5 pb-5 mb-5'>
                     {tweetList?.map((tweet) => (
                         <li key={tweet?.id}>

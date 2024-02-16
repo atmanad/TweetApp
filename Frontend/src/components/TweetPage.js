@@ -18,7 +18,7 @@ const TweetPage = ({ tweetList, currentUser, loggedIn }) => {
         const tweetById = tweetList.filter(ele => ele.id == id)[0];
         setTweet(tweetById)
         setLoading(false);
-    }, []);
+    }, [tweetList]);
 
     useEffect(() => {
         if (!loggedIn) navigate('/login');
@@ -37,29 +37,21 @@ function TweetReply({ tweet, id, email, tweetList, setTweet }) {
     const dispatch = useDispatch();
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(reply);
         let newReply = {
             tweetId: id,
             userId: email,
             message: reply
         }
-        let newTweet = {
-            replies: [newReply]
-        }
 
         postAComment(reply, email, id).then((res) => {
             if (res) {
                 tweetList.forEach((element, index) => {
-                    if (element.id === id) {
+                    if (element.id == id) {
                         dispatch(tweetActions.addReply({
                             index: index,
                             reply: newReply
                         }));
                         setReply("");
-                        setTweet(tweet => ({
-                            ...tweet,
-                            newTweet
-                        }));
                     }
                 });
             }

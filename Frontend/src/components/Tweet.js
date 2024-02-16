@@ -60,7 +60,7 @@ const Tweet = ({ t, reply, profilePage, loggedIn }) => {
         updateTweet(currentUser.email, id, { tag: tag, subject: updatedTweet }).then(res => {
             console.log(res);
             tweetList.forEach((element, index) => {
-                if (element.id === id) {
+                if (element.id == id) {
                     dispatch(tweetActions.updateTweet({
                         index: index,
                         subject: updatedTweet
@@ -138,22 +138,23 @@ const Tweet = ({ t, reply, profilePage, loggedIn }) => {
                             loggedin true  reply false => "" */}
 
                         <Link to={`/tweet/${id}`} className={!loggedIn || reply ? "disabled" : ""}>
-                            <FaReply className='tweet-icon mr-2' />
+                            <FaReply className='tweet-icon' id='reply' />
                         </Link>
+                        <span className='ms-3 me-4'>{replies && replies.length}</span>
 
-                        <span>{replies && replies.length}</span>
-                        <button className={'heart-button ml-2' + (!loggedIn && ' disabled')}
+                        <button className={'heart-button ' + (!loggedIn && ' disabled')}
                             onClick={handleLike}>
                             {hasLiked.length !== 0
                                 ? <FaHeart color='#e0245e' className='tweet-icon' />
                                 : <FaRegHeart className='tweet-icon' />
                             }
                         </button>
-                        <span>{likes && likes.length}</span>
+                        <span className='ms-2 me-4'>{likes && likes.length}</span>
+
                         {profilePage &&
                             <>
                                 <span><FaEdit className="tweet-icon" onClick={handleShow} /></span>
-                                <span><FaRegTrashAlt className="tweet-icon ml-3" color='#e0245e' onClick={handleDelete} /></span>
+                                <span><FaRegTrashAlt className="tweet-icon ms-4" color='#e0245e' onClick={handleDelete} /></span>
                             </>
                         }
                     </div>
